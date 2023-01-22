@@ -55,7 +55,7 @@ body {
           backdrop-filter: blur(1px);
   position: absolute;
   width: 90vw;
-  height: 400px;
+  height: 55vh;
   top: 3.5%;
   left: 5%;
   z-index: 99;
