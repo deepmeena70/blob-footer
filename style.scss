@@ -10,19 +10,7 @@ body {
   animation: gradient 15s ease infinite;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   color: #1c1c1c;
-}
-
-.text {
-  position: absolute;
-  font-size: 2rem;
-  top: 30%;
-  left: 50%;
-  font-weight: bold;
-  font-size: 4rem;
-  transform: translate(-50%, -50%);
-  color: rgba(white, 0.2);
 }
 
 @keyframes gradient {
@@ -37,10 +25,36 @@ body {
   }
 }
 
+.glass-text-container {
+  position: relative;
+  margin-bottom: 2%;
+  display: flex;
+  justify-content: center;
+  bottom: -11%;
+  .text {
+    position: absolute;
+    font-size: 2rem;
+    top: 50%;
+    left: 50%;
+    font-weight: bold;
+    font-size: 4rem;
+    transform: translate(-50%, -50%);
+    color: rgba(white, 0.2);
+  }
+  .glass-background {
+    background: rgba(black, 0.1);
+    backdrop-filter: blur(1px);
+    position: relative;
+    width: 90%;
+    height: 55vh;
+    z-index: 99;
+  }
+}
+
 @mixin large-circle {
   width: 45px;
   height: 45px;
-  top: 700px;
+  top: 84px;
   background: lightgrey;
   position: absolute;
   border-radius: 50%;
@@ -49,125 +63,20 @@ body {
 @mixin medium-circle {
   width: 25px;
   height: 25px;
-  top: 700px;
+  top: 96px;
   background: lightgrey;
   position: absolute;
   border-radius: 50%;
 }
 
-.glass-background {
-  background: rgba(black, 0.1);
-  backdrop-filter: blur(1px);
-  position: absolute;
-  width: 90vw;
-  height: 55vh;
-  top: 3.5%;
-  left: 5%;
-  z-index: 99;
-}
-
-.blob-container {
-  position: absolute;
-  width: 90vw;
-  height: 400px;
-  top: 3.5%;
-  left: 5%;
-  div:nth-child(1) {
-    @include large-circle;
-    left: 140px;
-    animation: animate-blob-1 7s ease 2s infinite;
-  }
-  div:nth-child(2) {
-    @include large-circle;
-    left: 650px;
-    animation: animate-blob-1 4s ease 3s infinite;
-  }
-  div:nth-child(3) {
-    @include large-circle;
-    left: 1050px;
-    animation: animate-blob-1 3.5s ease 2s infinite;
-  }
-  div:nth-child(4) {
-    @include medium-circle;
-    left: 10px;
-    animation: animate-blob-1 8.5s ease 3s infinite;
-  }
-  div:nth-child(5) {
-    @include medium-circle;
-    left: 300px;
-    animation: animate-blob-1 3.5s ease 2s infinite;
-  }
-  div:nth-child(6) {
-    @include medium-circle;
-    left: 500px;
-    animation: animate-blob-1 10.6s ease 3s infinite;
-  }
-  div:nth-child(7) {
-    @include medium-circle;
-    left: 800px;
-    animation: animate-blob-1 7.2s ease 2s infinite;
-  }
-  div:nth-child(8) {
-    @include medium-circle;
-    left: 1200px;
-    animation: animate-blob-1 4s ease 3s infinite;
-  }
-  div:nth-child(9) {
-    @include medium-circle;
-    left: 10px;
-    animation: animate-blob-1 2.5s ease 2s infinite;
-  }
-  @for $i from 10 through 19 {
-    div:nth-child(#{$i}) {
-      width: 25px;
-      height: 25px;
-      top: 700px;
-      left: $i * 125 - 1200px;
-      background: lightgrey;
-      position: absolute;
-      border-radius: 50%;
-      animation: animate-blob-2 $i/10 * 5s ease 4.5s infinite;
-    }
-  }
-}
-
-@keyframes animate-blob-1 {
-  0% {
-    transform: translateY(700px) scale(8) translateX(50px);
-  }
-  100% {
-    transform: translateY(-400px) scale(0) translateX(-50px);
-  }
-}
-@keyframes animate-blob-2 {
-  0% {
-    transform: translateY(700px) scale(78) translateX(50px);
-  }
-  100% {
-    transform: translateY(-290px) scale(0) translateX(-50px);
-  }
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@mixin blob () {
+@mixin blob() {
   background: lightgrey;
-    width: 300px;
-    height: 300px;
-    position: absolute;
-    top: 200px;
-    border-radius: 35%;
-    transform-origin: center;
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 80px;
+  border-radius: 35%;
+  transform-origin: center;
 }
 
 @mixin blob-after() {
@@ -184,60 +93,160 @@ body {
   }
 }
 
-.blob-group-1 {
-  position: absolute;
-  filter: drop-shadow(0 0 10px darkgrey);
-  top: 37vh;
-  animation: blob-group-translate 2s linear 2s infinite alternate-reverse;
-  div:nth-child(1) {
-    @include blob;
-    left: 600px;
-    animation: blob-rotate-1 29s linear infinite forwards;
-    @include blob-after;
+.blob-container {
+  position: relative;
+  width: 100vw;
+  height: 100px;
+  overflow: hidden;
+  background: transparent;
+  .blob-circle-container {
+    position: absolute;
+    width: inherit;
+    top: 0px;
+    div:nth-child(1) {
+      @include large-circle;
+      left: 140px;
+      animation: animate-blob-1 7s ease 2s infinite;
+    }
+    div:nth-child(2) {
+      @include large-circle;
+      left: 650px;
+      animation: animate-blob-1 4s ease 3s infinite;
+    }
+    div:nth-child(3) {
+      @include large-circle;
+      left: 1050px;
+      animation: animate-blob-1 3.5s ease 2s infinite;
+    }
+    div:nth-child(4) {
+      @include medium-circle;
+      left: 10px;
+      animation: animate-blob-1 8.5s ease 3s infinite;
+    }
+    div:nth-child(5) {
+      @include medium-circle;
+      left: 300px;
+      animation: animate-blob-1 3.5s ease 2s infinite;
+    }
+    div:nth-child(6) {
+      @include medium-circle;
+      left: 500px;
+      animation: animate-blob-1 10.6s ease 3s infinite;
+    }
+    div:nth-child(7) {
+      @include medium-circle;
+      left: 800px;
+      animation: animate-blob-1 7.2s ease 2s infinite;
+    }
+    div:nth-child(8) {
+      @include medium-circle;
+      left: 1200px;
+      animation: animate-blob-1 4s ease 3s infinite;
+    }
+    div:nth-child(9) {
+      @include medium-circle;
+      left: 10px;
+      animation: animate-blob-1 2.5s ease 2s infinite;
+    }
+    @for $i from 10 through 19 {
+      div:nth-child(#{$i}) {
+        width: 25px;
+        height: 25px;
+        top: $i*20px;
+        left: $i * 125 - 1200px;
+        background: lightgrey;
+        position: absolute;
+        border-radius: 50%;
+        animation: animate-blob-2 $i/10 * 5s ease 4.5s infinite;
+      }
+    }
+  }
+  .blob-group-1 {
+    position: absolute;
+    filter: drop-shadow(0 0 10px darkgrey);
+    top: 15px;
+    animation: blob-group-translate 12s linear infinite alternate-reverse;
+    div:nth-child(1) {
+      @include blob;
+      left: 600px;
+      animation: blob-rotate-1 12s linear infinite forwards;
+      @include blob-after;
+    }
+  }
+  .blob-group-2 {
+    position: absolute;
+    filter: drop-shadow(0 0 10px darkgrey);
+    top: 20px;
+    animation: blob-group-translate 5s linear infinite alternate;
+    div:nth-child(1) {
+      @include blob;
+      left: 200px;
+      animation: blob-rotate-1 5s linear infinite forwards;
+      @include blob-after;
+    }
+  }
+  .blob-group-3 {
+    position: absolute;
+    filter: drop-shadow(0 0 10px darkgrey);
+    top: 30px;
+    animation: blob-group-translate 8s linear infinite alternate-reverse;
+    div:nth-child(1) {
+      @include blob;
+      left: 1000px;
+      animation: blob-rotate-1 8s linear infinite forwards;
+      @include blob-after;
+    }
   }
 }
 
-.blob-group-2 {
-  position: absolute;
-  filter: drop-shadow(0 0 10px darkgrey);
-  top: 37vh;
-  animation: blob-group-translate 2s linear 2s infinite alternate;
-  div:nth-child(1) {
-    @include blob;
-    left: 200px;
-    animation: blob-rotate-1 9s linear infinite forwards;
-    @include blob-after;
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
   }
-}
-.blob-group-3 {
-  position: absolute;
-  filter: drop-shadow(0 0 10px darkgrey);
-  top: 38vh;
-  animation: blob-group-translate 2s linear 2s infinite alternate-reverse;
-  div:nth-child(1) {
-    @include blob;
-    left: 1000px;
-    animation: blob-rotate-1 19s linear infinite forwards;
-    @include blob-after;
-    
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
+@keyframes animate-blob-1 {
+  0% {
+    transform: translateY(40px) scale(1.5) translateX(50px);
+  }
+  100% {
+    transform: translateY(-100px) scale(0) translateX(-50px);
+  }
+}
+@keyframes animate-blob-2 {
+  0% {
+    transform: translateY(50px) scale(14) translateX(90px);
+  }
+  100% {
+    transform: translateY(-100px) scale(0) translateX(-90px);
+  }
+}
 @keyframes blob-rotate-1 {
   0% {
-    transform: rotateZ(0deg) translateX(5);
+    transform: rotateZ(0deg) translateX(5px);
   }
   100% {
-    transform: rotateZ(360deg) translate(10px);
+    transform: rotateZ(360deg) translateX(-5px);
   }
 }
-
 @keyframes blob-group-translate {
   0% {
-    transform: translate(50px);
+    transform: translateX(140px);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(5px);
   }
   100% {
-    transform: translate(-50px);
+    transform: translateX(-140px);
   }
 }
 
@@ -245,10 +254,8 @@ footer {
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 35vh;
   background: lightgrey;
-  position: absolute;
-  bottom: 0;
+  position: relative;
   a {
     text-decoration: none;
     color: #1c1c1c;
